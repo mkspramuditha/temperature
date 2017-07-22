@@ -43,13 +43,13 @@ class APIController extends DefaultController
     }
 
     /**
-     * @Route("/data/{value}", name="api")
+     * @Route("/data/", name="api")
      */
     public function apiAction(Request $request,$value)
     {
         $data = new Data();
         $data->setDatetime(new \DateTime('now'));
-        $data->setData($value);
+        $data->setData($request->get('value'));
         $this->insert($data);
 
         return new Response("value saved");
