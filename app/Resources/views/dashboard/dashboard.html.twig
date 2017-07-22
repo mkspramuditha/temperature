@@ -1,0 +1,57 @@
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<script src="https://code.highcharts.com/stock/highstock.js"></script>
+<script src="https://code.highcharts.com/stock/modules/exporting.js"></script>
+<script src="{{ asset('assets/js/dark-unica.js') }}"></script>
+<link rel='stylesheet' href="{{ asset('assets/general/bootstrap/css/bootstrap.css') }}">
+<script src="{{ asset('assets/general/bootstrap/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('assets/mqtt/browserMqtt.js') }}"></script>
+
+<script>
+   $(function () {
+        //'https://www.highcharts.com/samples/data/jsonp.php?filename=aapl-c.json&callback=?'
+
+//        $.getJSON([[1256083200000,29.27],[1256169600000,29.31]], function (data) {
+            // Create the chart
+            $('#data').highcharts('StockChart', {
+
+
+                rangeSelector: {
+                    selected: 1
+                },
+
+                title: {
+                    text: 'Sensor Data'
+                },
+
+                series: [{
+                    name: 'Data',
+                    {#data: {{ chart|json_encode(constant('JSON_PRETTY_PRINT'))|raw }},#}
+                    data: {{ chart }},
+                    tooltip: {
+                        valueDecimals: 2
+                    }
+                }]
+            });
+        });
+
+
+
+</script>
+
+<div class="container">
+    <div class="panel-group">
+        <div class="panel panel-success">
+            <div class="panel-heading">Temperature Meter</div>
+            <div class="panel-body">
+                <div id="data" style="height: 400px; min-width: 310px"></div>
+            </div>
+        </div>
+        <div>
+
+        </div>
+    <h1>
+    </h1>
+</div>
+
+
