@@ -16,11 +16,12 @@ class DashboardController extends DefaultController
 
     public function indexAction(Request $request)
     {
+        date_default_timezone_set("Asia/Colombo");
         $values = $this->getRepository('Data')->findBy(array(), array('datetime' => 'ASC'));
         $arry = [];
         foreach ($values as $value){
             $time =$value->getDateTime();
-            $unixTime = (float)(mktime($time->format('s'), $time->format('i'), $time->format('H'), $time->format('d'), $time->format('m'), $time->format('Y')))*1000;
+            $unixTime = (float)(mktime($time->format('s'), $time->format('i'), $time->format('H'), $time->format('d'), $time->format('m'), $time->format('Y'),-1))*1000;
 //            var_dump($unixTime);
             $arry[] = [$unixTime,(float)$value->getData()];
         }
