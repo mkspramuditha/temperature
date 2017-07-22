@@ -20,9 +20,10 @@ class DashboardController extends DefaultController
         $values = $this->getRepository('Data')->findBy(array(), array('datetime' => 'ASC'));
         $arry = [];
         foreach ($values as $value){
-            $time =$value->getDateTime();
-            $unixTime = (float)(mktime($time->format('s'), $time->format('i'), $time->format('H'), $time->format('d'), $time->format('m'), $time->format('Y'),-1))*1000;
+            $time =$value->getDatetime();
+//            $unixTime = (float)(mktime($time->format('s'), $time->format('i'), $time->format('H'), $time->format('d'), $time->format('m'), $time->format('Y'),-1))*1000;
 //            var_dump($unixTime);
+            $unixTime = $time->getTimestamp()*1000;
             $arry[] = [$unixTime,(float)$value->getData()];
         }
 
